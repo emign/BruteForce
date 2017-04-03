@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressIndicator?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-
-<GridPane alignment="center" hgap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200.0" minWidth="-Infinity" prefWidth="700.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="10" maxHeight="-Infinity" maxWidth="-Infinity"
+          minHeight="200.0" minWidth="-Infinity" prefWidth="700.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.111"
+          fx:controller="sample.Controller">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
@@ -26,23 +19,33 @@
          <children>
             <Label layoutX="14.0" layoutY="31.0" text="Passwort" />
             <Button fx:id="buttonKnacken" layoutX="286.0" layoutY="26.0" mnemonicParsing="false" onAction="#knackenKlicked" text="Knacken" />
-            <TextField fx:id="textFieldPassword" layoutX="92.0" layoutY="26.0" />
-            <Label id="calcPerSec" fx:id="labelCalcPerSecond" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="38.0" layoutY="96.0" prefHeight="17.0" prefWidth="125.0" text="0" textAlignment="RIGHT" textOverrun="LEADING_WORD_ELLIPSIS" />
+            <Label id="calcs" fx:id="labelCalcs" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="38.0"
+                   layoutY="96.0" prefHeight="17.0" prefWidth="125.0" text="0" textAlignment="RIGHT"
+                   textOverrun="LEADING_WORD_ELLIPSIS"/>
             <Label layoutX="186.0" layoutY="96.0" text="Berechnugen" />
-            <Label id="timePassed" fx:id="labelDauer" alignment="CENTER_RIGHT" layoutX="38.0" layoutY="126.0" prefHeight="17.0" prefWidth="125.0" text="0" textAlignment="RIGHT" />
-            <Label layoutX="186.0" layoutY="126.0" text="Dauer in Sekunden" />
+            <Label id="timePassed" fx:id="labelDauer" alignment="CENTER_RIGHT" layoutX="38.0" layoutY="135.0"
+                   prefHeight="17.0" prefWidth="125.0" text="0" textAlignment="RIGHT"/>
+            <Label layoutX="186.0" layoutY="135.0" text="Dauer in Sekunden"/>
             <ProgressIndicator fx:id="progressIndicator" layoutX="390.0" layoutY="13.0" visible="false" />
-            <ButtonBar layoutX="14.0" layoutY="168.0" prefHeight="18.0" prefWidth="443.0">
-               <buttons>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" selected="true" text="Alpha">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="group" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" text="Numerisch" toggleGroup="$group" />
-                  <RadioButton mnemonicParsing="false" prefHeight="19.0" prefWidth="762.0" text="Alphanumerisch" toggleGroup="$group" />
-               </buttons>
-            </ButtonBar>
+            <RadioButton id="alpha" fx:id="checkBoxAlpha" layoutX="13.0" layoutY="177.0" mnemonicParsing="false"
+                         prefHeight="18.0" selected="true" text="Alpha">
+               <toggleGroup>
+                  <ToggleGroup fx:id="checkGroup"/>
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton id="numeric" fx:id="checkBoxNumeric" layoutX="92.0" layoutY="177.0" mnemonicParsing="false"
+                         prefHeight="18.0" text="Numerisch" toggleGroup="$checkGroup"/>
+            <RadioButton id="alphanumeric" fx:id="checkBoxAlphaNumeric" layoutX="198.0" layoutY="177.0"
+                         mnemonicParsing="false" prefHeight="19.0" prefWidth="762.0" text="Alphanumerisch"
+                         toggleGroup="$checkGroup"/>
+            <TextArea fx:id="textFieldResult" editable="false" layoutX="427.0" layoutY="135.0" prefHeight="53.0"
+                      prefWidth="200.0"/>
+            <PasswordField fx:id="textFieldPassword" layoutX="92.0" layoutY="26.0"/>
+            <Text layoutX="427.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Das Passwort lautet:"/>
+            <Label id="calcPerSec" fx:id="labelCalcsPerSecond" alignment="CENTER_RIGHT" contentDisplay="RIGHT"
+                   layoutX="38.0" layoutY="114.0" prefHeight="17.0" prefWidth="125.0" text="0" textAlignment="RIGHT"
+                   textOverrun="LEADING_WORD_ELLIPSIS"/>
+            <Label layoutX="186.0" layoutY="114.0" text="Berechnugen pro Sekunde"/>
          </children>
       </AnchorPane>
    </children>

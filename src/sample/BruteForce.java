@@ -35,17 +35,13 @@ public class BruteForce implements Runnable{
 
 
         String bfGenPW =null;
-        int schritte = 100;
-        int counter = 0;
+
+        Long counter = 0L;
         while (!word.equals(bfGenPW)) {
             bfGenPW = bruteForcer.computeNextCombination();
-            if (counter % schritte == 0)
-
-                controller.calculations++;
             counter++;
-
         }
-        System.out.println(String.format("Decrypted string: %s", bfGenPW));
+        controller.calculations = counter;
         controller.stopTimer();
         controller.refreshDisplay();
         controller.refreshTextField(bfGenPW);

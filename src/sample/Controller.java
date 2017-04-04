@@ -5,7 +5,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import javax.xml.soap.Text;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.LinkedList;
+import java.util.Locale;
+
+import static jdk.nashorn.internal.objects.NativeMath.round;
 
 public class Controller implements Runnable{
     public Long calculations = new Long(0);
@@ -13,6 +19,7 @@ public class Controller implements Runnable{
     public long stopTime = System.nanoTime();
     public Long runTime = 0L;
     public double calcPerSecond = 0.0;
+    public StringBuilder trace = new StringBuilder();
     @FXML
     private PasswordField textFieldPassword;
     @FXML
@@ -33,6 +40,10 @@ public class Controller implements Runnable{
     private RadioButton checkBoxAlphaNumeric;
     @FXML
     private TextArea textFieldResult;
+    @FXML
+    private TextArea textAreaTrace;
+    @FXML
+    private CheckBox checkBoxTrace;
     private LinkedList<RadioButton> checkBoxes = new LinkedList<RadioButton>();
 
     @FXML
@@ -56,7 +67,7 @@ public class Controller implements Runnable{
         progressIndicator.setVisible(true);
         buttonKnacken.setDisable(true);
 
-        BruteForce b = new BruteForce(this, word, checkedCheckBox());
+        BruteForce b = new BruteForce(this, word, checkedCheckBox(), checkBoxTrace.isSelected());
        Thread t1 = new Thread(b);
        t1.start();
 
@@ -82,6 +93,9 @@ public class Controller implements Runnable{
             @Override
             public void run() {
                 textFieldResult.setText(text + System.getProperty("line.separator"));
+                if (!trace.toString().isEmpty()){
+                    textAreaTrace.setText(trace.toString());
+                }
             }
         });
     }
@@ -91,6 +105,7 @@ public class Controller implements Runnable{
         startTime = 0L;
         stopTime = 0L;
         runTime = 0L;
+        trace.setLength(0);
     }
 
     private String checkedCheckBox() {
@@ -108,12 +123,13 @@ public class Controller implements Runnable{
     public void run() {
         runTime = stopTime-startTime;
         double seconds = (double)runTime / 1000000000.0;
-        labelDauer.setText(String.valueOf(seconds));
-        labelCalcs.setText(calculations.toString());
+        //labelDauer.setText(String.valueOf(seconds));
+        labelDauer.setText(new DecimalFormat("#.##").format(seconds));
+        labelCalcs.setText(NumberFormat.getNumberInstance(Locale.GERMANY).format(calculations));
         progressIndicator.setVisible(false);
         buttonKnacken.setDisable(false);
         calcPerSecond = calculations / seconds;
-        labelCalcsPerSecond.setText(String.valueOf((long) calcPerSecond));
+        labelCalcsPerSecond.setText(NumberFormat.getNumberInstance(Locale.GERMANY).format((long)calcPerSecond));
 
 
     }

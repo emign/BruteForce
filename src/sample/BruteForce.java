@@ -7,11 +7,13 @@ public class BruteForce implements Runnable{
     Controller controller;
     String word;
     String alphabet;
+    Boolean traced;
 
-    public BruteForce(Controller controller, String word, String alphabet) {
+    public BruteForce(Controller controller, String word, String alphabet, Boolean traced) {
         this.controller = controller;
         this.word = word;
         this.alphabet = alphabet;
+        this.traced = traced;
     }
 
 
@@ -35,12 +37,21 @@ public class BruteForce implements Runnable{
 
 
         String bfGenPW =null;
+        StringBuilder trace = new StringBuilder();
+
 
         Long counter = 0L;
         while (!word.equals(bfGenPW)) {
             bfGenPW = bruteForcer.computeNextCombination();
             counter++;
+            if (traced){
+                trace.append(counter).append(":").append(bfGenPW).append(System.getProperty("line.separator"));
+            }
         }
+        if (traced){
+            controller.trace.append(trace);
+        }
+
         controller.calculations = counter;
         controller.stopTimer();
         controller.refreshDisplay();

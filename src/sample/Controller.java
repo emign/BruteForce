@@ -5,13 +5,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import javax.xml.soap.Text;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.LinkedList;
 import java.util.Locale;
-
-import static jdk.nashorn.internal.objects.NativeMath.round;
 
 public class Controller implements Runnable{
     public Long calculations = new Long(0);
@@ -44,6 +41,8 @@ public class Controller implements Runnable{
     private TextArea textAreaTrace;
     @FXML
     private CheckBox checkBoxTrace;
+    @FXML
+    private Label labelLength;
     private LinkedList<RadioButton> checkBoxes = new LinkedList<RadioButton>();
 
     @FXML
@@ -98,6 +97,10 @@ public class Controller implements Runnable{
                 }
             }
         });
+    }
+
+    public void refreshLabelLength() {
+        labelLength.setText(String.valueOf(textFieldPassword.getText().length()));
     }
 
     private void resetDisplay(){
